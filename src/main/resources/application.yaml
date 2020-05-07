@@ -3,9 +3,9 @@ spring:
   datasource: 
     hikari: 
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://172.29.73.50:3306/OJT?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
-      username: root
-      password: Genian123!
+      jdbc-url: jdbc:mysql://?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      username: 
+      password: 
 
 logging: 
   level: 
