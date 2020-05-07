@@ -97,9 +97,6 @@
 
 -  `@Named` 주된 역할은 애플리케이션 내에서 (JSF EL) EL 문을 해석 할 목적으로 Bean을 정의
 
--  javax.faces.bean 으로 import 할 것
-
-
 
 **@Configuration**
 
