@@ -1,0 +1,17 @@
+
+spring: 
+  datasource: 
+    hikari: 
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://172.29.73.50:3306/OJT?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      username: root
+      password: Genian123!
+
+logging: 
+  level: 
+    org.springframework: INFO
+
+mybatis: 
+  #config-location: classpath:mybatis-config.xml
+  configuration: 
+    map-underscore-to-camel-case: true
