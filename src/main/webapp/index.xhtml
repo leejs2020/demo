@@ -30,44 +30,54 @@
 .btn01 {
 	margin-right: 20px;
 }
+
+.input01 {
+	margin-left:10px;
+	
+}
 </style>
 </h:head>
 <h:body>
-	<p:panel>Spring Boot With JSF , PrimeFaces</p:panel>
-	<h:outputText value="#{demo.list}"></h:outputText>
-	<h:form>
-		<p:dataTable var="item" value="#{demo.list}" styleClass="dt">
+	<h:form id="form1">
+		<p:panel>Spring Boot With JSF , PrimeFaces</p:panel>
+		<h:outputText value="#{demo.readList()}"></h:outputText>
+
+		<p:dataTable id="dt01" var="item" value="#{demo.readList()}" styleClass="dt">
 			<p:column headerText="No" styleClass="col1">
 				<h:outputText value="#{item.no}" />
 			</p:column>
 			<p:column headerText="제목" styleClass="col2">
-				<a href="/board/boardDetail.xhtml" rendered="#{item.deleteYn == 'y'} "><h:outputText
-						value="#{item.subject}" /></a>
+				<p:link outcome="/board/boardDetail"
+					rendered="#{item.deleteYn ne 'y'}" value="#{item.subject}">
+					<f:param name="no" value="#{item.no}" />
+				</p:link>
+				<h:outputText rendered="#{item.deleteYn eq 'y'}" value="삭제된 글입니다" />
 			</p:column>
 			<p:column headerText="작성자" styleClass="col3">
 				<h:outputText value="#{item.userId}" />
 			</p:column>
 			<p:column headerText="삭제" styleClass="col3">
-				<c:if test="#{item.deleteYn eq null}">
-					<h:commandButton action="#{demo.removeBoard()}" value="삭  제"
-						icon="pi pi-trash" style="margin-right:20px;">
-						<f:param name="paramNo" value="#{item.no}" />
-					</h:commandButton>
-				</c:if>
+				<p:commandButton id="removeBoard" update="dt01"
+					action="#{demo.removeBoard}" value="삭제" icon="pi pi-trash"
+					style="margin-right:20px; width:100%;"
+					styleClass="ui-priority-primary" disabled="#{item.deleteYn eq 'y'}">
+					<f:param name="paramNo" value="#{item.no}" />
+				</p:commandButton>
 			</p:column>
 		</p:dataTable>
 	</h:form>
-
-	<h:form id="createBoard">
-		<h:outputLabel for="id">사용자아이디</h:outputLabel>
-		<h:inputText id="userId" value="#{demoVo.userId}"></h:inputText>
-		<h:inputText id="subject" value="#{demoVo.subject}"></h:inputText>
-		<h:outputLabel for="name">제목</h:outputLabel>
-
-		<h:commandButton id="createUser" value="저장"
-			action="#{demo.writeBoard(demoVo)}">
-		</h:commandButton>
-	</h:form>
-
+	<div style="margin-top: 5%;">
+	</div>
+	<div>
+		<h:form id="createBoard">
+			<h:outputLabel for="id">사용자아이디</h:outputLabel>
+			<p:inputText id="userId" value="#{demoVo.userId}" style="margin-left:10px;"></p:inputText>
+			<h:outputLabel for="name">제목</h:outputLabel>
+			<p:inputText id="subject" value="#{demoVo.subject}"></p:inputText>
+			<p:commandButton id="createUser" value="저장"
+				action="#{demo.writeBoard(demoVo)}">
+			</p:commandButton>
+		</h:form>
+	</div>
 </h:body>
 </html>

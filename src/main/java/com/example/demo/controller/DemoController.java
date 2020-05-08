@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +20,8 @@ import com.google.gson.Gson;
 
 @Named("demo")
 @ViewScoped
+@RestController
+@RequestMapping("/board")
 public class DemoController implements Serializable {
 
 	private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
@@ -28,7 +29,7 @@ public class DemoController implements Serializable {
 	@Autowired
 	private DemoService service;
 
-	public List<DemoVo> getList() {
+	public List<DemoVo> readList() {
 
 		List<DemoVo> list = service.getList();
 
@@ -58,5 +59,11 @@ public class DemoController implements Serializable {
 		logger.debug(s);
 		logger.info("===============================================");
 		service.removeBoard(param);
+	}
+	
+	@PostMapping("/removeApi")
+	public void removeBoardRest(String no) {
+		
+		service.removeBoard(no);
 	}
 }
